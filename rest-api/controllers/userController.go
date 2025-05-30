@@ -1,31 +1,21 @@
 package controllers
 
 import (
-	"net/http"
+    "net/http"
 
-	"github.com/gin-gonic/gin"
+    "github.com/gin-gonic/gin"
+    "rest-api/services"
 )
 
-func CreateUser(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "mypost",
-		"abc":     "xyz",
-	})
-
+type UserController struct {
+    service services.UserService
 }
 
-func GetUsers(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "mypost",
-		"abc":     "xyz",
-	})
-
+func NewUserController(s services.UserService) *UserController {
+    return &UserController{service: s}
 }
 
-func DeleteUser() {
-
-}
-
-func UpdateUser() {
-
+func (c *UserController) GetAllUsers(ctx *gin.Context) {
+    users := c.service.GetAllUsers()
+    ctx.JSON(http.StatusOK, users)
 }
