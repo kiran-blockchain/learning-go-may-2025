@@ -5,11 +5,13 @@ import (
     "rest-api/controllers"
 )
 
-func SetupRouter(userController *controllers.UserController) *gin.Engine {
+func SetupRouter(userController *controllers.UserController,orderController *controllers.OrderController) *gin.Engine {
     r := gin.Default()
 
     // Users endpoint
     r.GET("/users", userController.GetAllUsers)
+
+    r.POST("/orders", orderController.PlaceOrder)
 
     return r
 }

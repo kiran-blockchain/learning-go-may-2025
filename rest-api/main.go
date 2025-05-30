@@ -10,7 +10,8 @@ func main() {
     container := dependency.BuildContainer()
 
     // Setup router
-    r := routers.SetupRouter(container.UserController)
+    r := routers.SetupRouter(container.UserController,container.OrderController)
+
 
     // Start server
     r.Run(":4000")
